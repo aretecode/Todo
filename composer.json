@@ -1,0 +1,34 @@
+{
+    "name": "radar/project",
+    "type": "project",
+    "description": "An Action-Domain-Responder project skeleton.",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.5.0",
+        "radar/adr": "*",
+        "relay/middleware": "*",
+        "josegonzalez/dotenv": "*",
+        "zendframework/zend-diactoros": "*",
+
+        "aura/auth": "2.0.0-beta2",
+        "aura/accept": "*",
+        "aura/web": "*",
+        "aura/sql": "*",
+        "aura/view": "*",
+
+        "phpunit/phpunit": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Todo\\": "src/Web/Todo/",
+            "": "src/"            
+        }
+    },
+    "scripts": {
+        "post-create-project-cmd" : [
+            "php --run \"touch('.env');\""
+        ]
+    },
+
+    "minimum-stability": "dev"
+}
