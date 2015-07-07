@@ -45,30 +45,24 @@
 
 
 
-Questions: 
-MOST IMPORTANT!!! - HOW SHOULD USER BE IMPLEMENTED?
+# Questions: 
+- !!! How should User, Authentication, & Authorization be implemented?
+    Should UserId be in the HTTTP Request & then use AppService and return a payload only if NOT_AUTHORIZED?
 
-Should UserId be in the HTTTP Request & then use AppService and return a payload only if NOT_AUTHORIZED?
+- Why does EditItemInput not work?
 
-Should Parameters in Domain be (array), or individual?
+- Add vs Create?
 
-Why does EditItemInput not work?
+- How to best test testGetListSuccess ? get results from db & compare? Regex compare just a bit of it?
 
-Add vs Create?
-
-How to best test testGetListSuccess ? get results from db & compare? Regex compare just a bit of it?
-
-
-Does it compare Input instead of Output if it is a 404?
+- Does it compare Input instead of Output if it is a 404?
 
 ### Files with questions:
-Web\Responder\AbstractTodoResponder
-Web\Config
+- Web\Responder\AbstractTodoResponder
+- Web\Config
 
 ## @TODO: 
 Make the aj(ax) example not just interpret other HTTP status codes as `error` but react respectively.
 
 ## Thank you 
 I really appreciate your input, feel free to make it as long or as short as you would like. Thank you.
-
-# TODO 
