@@ -58,5 +58,10 @@
 ## @TODO: 
 Make the aj(ax) example not just interpret other HTTP status codes as `error` but react respectively.
 
+## Credits (uses)
+- [Radar](https://github.com/radarphp/Radar.Adr/)
+- [ADR](https://github.com/pmjones/adr)
+- [AuraAuth example](https://github.com/harikt/authentication-pdo-example)
+
 ## Thank you 
 I really appreciate your input, feel free to make it as long or as short as you would like. Thank you.
