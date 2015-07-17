@@ -35,7 +35,7 @@
     php -S localhost:8080 -t web/
 ```
 
-- Browse to <http://localhost:8080/todo/ajax.php> too do some stuff with a GUI
+- Browse to <http://localhost:8080/todo/ajax.php> to do some stuff with a GUI
 
 - You can also browse to <http://localhost:8080/add/words-of-the-todo-you-want-to-add> or with other commands
 
