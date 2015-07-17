@@ -2,32 +2,23 @@
 
 namespace Todo\Action;
 
-use Domain\User\ApplicationService\UserService;
+use Domain\Domain;
 use Arbiter\Action;
 use Aura\Web\Request;
 use Radar\Adr\Input;
 
+// prefilter (num) or (email) with (filterus?) lib? 
 class AbstractTodoAction extends Action {
-    protected $userDomain;
-    protected $todoDomain;
-
     public function __construct(
         Input $input,
-        $todoDomain,
-        UserService $userDomain, 
+        Domain $domain, 
         $responder
     ) {
         $this->input = $input;
-        $this->todoDomain = $todoDomain;
-        $this->userDomain = $userDomain;
+        $this->domain = $domain;
         $this->responder = $responder;
     }
     
-    // Action uses Input, whatever (had Request)
-    // why isn't it $this->responder->setPayload($payload); && return $this->responder->__invoke();
-    // $input['cookies']
-    // should there be multiple Actions, or multiple Inputs, or is this fine?
-    // prefilter (num) or (email) with filterus lib? 
-    // then determine best place for validating
-    // abstract public function __invoke($input) {
+    // can have parameters as array() or could change for single parameters
+    // abstract function __invoke(...) : Payload; 
 }

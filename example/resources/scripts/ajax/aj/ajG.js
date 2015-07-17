@@ -1,20 +1,35 @@
 /**
  * 
- * (a)j(a)x Get 
+ * aj(ax) Get 
  * 
  * @param  {} params 
  * @return void
  *
  */
-function jaG(d) {
+function ajG(d) {
     var request = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHttp") : window.XMLHttpRequest ? new XMLHttpRequest() : false; //  another ternary;
     
     request.onreadystatechange = function() { 
         if (4 == request.readyState) {
-            if (200 == request.status) 
-                d.success(request.responseText)
+            // for (key in d.listeners) 
+                // if (request.status == key) d.listeners[key](request)
+            
+            if ('undefined' !== typeof d.listeners[request.status]) {
+                // if it is 200, see if it has responseAsObject, then json parse it. If not 200, use the whole request
+                d.listeners[request.status](
+                    200 == request.status
+                    ? 
+                        d.responseAsObject 
+                        ? 
+                            JSON.parse(request.responseText) 
+                        : 
+                            request.responseText
+                    :
+                        request
+                )
+            }
             else 
-                d.error(request)
+                d.listeners.other(request);
 
             if (d.done instanceof Function) d.done(request); 
         }

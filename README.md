@@ -35,33 +35,35 @@
     php -S localhost:8080 -t web/
 ```
 
-- Browse to <http://localhost:8080/todo/ajax.php> to do some stuff with a GUI
+- Browse to <http://localhost:8080/todo/ajax.php> too do some stuff with a GUI
 
 - You can also browse to <http://localhost:8080/add/words-of-the-todo-you-want-to-add> or with other commands
 
-# Questions: 
-- !!! How should User, Authentication, & Authorization be implemented?
-    Should UserId be in the HTTTP Request & then use AppService and return a payload only if NOT_AUTHORIZED?
+## Questions: 
+Should UserId be in the HTTTP Request & then use AppService and return a payload only if NOT_AUTHORIZED?
 
-- Why does EditItemInput not work?
+Should Parameters in Domain be (array), or individual?
+> Whichever makes more ssense for your domain
 
-- Add vs Create?
+Why does EditItemInput not work?
+> Unknown, debug with playing around with the $_SERVER, 
 
-- How to best test testGetListSuccess ? get results from db & compare? Regex compare just a bit of it?
+Add vs Create?
+> Add makes more sense when using Views and with that View, reaching into the domain only for defaults
 
-- Does it compare Input instead of Output if it is a 404?
-
-### Files with questions:
-- Web\Responder\AbstractTodoResponder
-- Web\Config
+How to best test testGetListSuccess ? get results from db & compare? Regex compare just a bit of it?
+> Current comparison is fine, think it is something with Zend
+Does it compare Input instead of Output if it is a 404?
+> Yes, but in Zend 
 
 ## @TODO: 
-Make the aj(ax) example not just interpret other HTTP status codes as `error` but react respectively.
+AuthorizationService implementation.
+~~Fix User~~
+~~Add Login form for the authentication.~~
+Put it on a demo site so it can be played around with.
+~Make the aj(ax) example not just interpret other HTTP status codes as `error` but react respectively.
 
 ## Credits (uses)
 - [Radar](https://github.com/radarphp/Radar.Adr/)
 - [ADR](https://github.com/pmjones/adr)
 - [AuraAuth example](https://github.com/harikt/authentication-pdo-example)
-
-## Thank you 
-I really appreciate your input, feel free to make it as long or as short as you would like. Thank you.

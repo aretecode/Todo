@@ -32,9 +32,12 @@ class UserService {
      */
     function isUserNotAuthenticatedPayload() {
         $user = $this->gateway->userForCurrentSession();
-        if (! $user->isAuthenticated()) {
+        if (! $user || ! $user->isAuthenticated()) {
             return $this->payload
-                ->setStatus(Payload::NOT_AUTHENTICATED);
+                ->setStatus(Payload::NOT_AUTHENTICATED)
+                ->setOutput('NOT_AUTHENTICATED')
+                ->setMessages('NOT AUTHENTICATED')
+                ->setInput('NOT_AUTHENTICATED, go to login.php (this should probably be in messages and then handled differently in the Responder?)');
         }        
         return false;
     }

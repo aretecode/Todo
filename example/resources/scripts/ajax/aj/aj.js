@@ -14,11 +14,33 @@ function aj(d) {
     // if (!request && d.error('File not found')) return; 
 
     request.onreadystatechange = function() { 
+
         if (4 == request.readyState) {
+            /*
             if (200 == request.status) 
                 d.success(d.responseAsObject ? JSON.parse(request.responseText) : request.responseText);
             else 
                 d.error(request)
+            // if ('undefined' != d.listeners) { }
+            */
+
+            // go through the listeners
+            if ('undefined' !== typeof d.listeners[request.status]) {
+                // if it is 200, see if it has responseAsObject, then json parse it. If not 200, use the whole request
+                d.listeners[request.status](
+                    200 == request.status
+                    ? 
+                        d.responseAsObject 
+                        ? 
+                            JSON.parse(request.responseText) 
+                        : 
+                            request.responseText
+                    :
+                        request
+                )
+            }
+            else 
+                d.listeners.other(request);
 
             if (d.done instanceof Function) d.done(request)
         }

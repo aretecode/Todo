@@ -35,34 +35,6 @@ class Config extends ContainerConfig
             $di->params['Domain\Todo\ApplicationService\DeleteItem']['payload'] = $p;
         */       
 
-        ////////////////////////////////////
-        // NONE OF THESE WORK      
-        // todo/DeleteItem
-        // todo:deleteitem
-        // delete_item
-        ////////$di->set('delete_item', $di->lazyNew('Domain\Todo\ApplicationService\DeleteItem'));
-        ////////$di->types['Mapper'] = $di->lazyGet('delete_item');
-        // $di->types['Domain\Todo\Mapper'] = $di->lazyGet('Domain\Todo\Mapper');
-        /*
-            $di->set('service_name', $di->lazyNew(
-                'ExampleWithParams',
-                array(
-                    'bar' => 'alternative_bar_value',
-                )
-            ));
-        */
-        // especially this one...
-        // $di->params['Domain\Todo\ApplicationService\Mapper']['ExtendedPdo'] = $di->lazyNew('Aura\Sql\ExtendedPdo', ['dsn' => $database_handle]);
-
-
-        ////////////////////////////////////
-        /// wanted to set the autoresolve to magic here but couldn't seem to
-        // $di->params['Domain\Todo\Mapper']['map'] = $di->lazyGetCall('radar/adr:router', 'getMap');
-        // $di->set('Domain\Todo\ApplicationService\DeleteItem', $di->lazyNew('Domain\Todo\ApplicationService\DeleteItem'));
-        // $di->set('\Domain\Todo\ApplicationService\DeleteItem', $di->lazyNew('\Domain\Todo\ApplicationService\DeleteItem'));
-        // $di->setters['Aura\Router\RouterContainer']['setRouteFactory'] = $di->newFactory('Radar\Adr\Route');
-        ////////////////////////////////////
-        
         // could do Todo_database_handle & Account_database_handle
         $database_handle = new \PDO($_ENV['DB_DSN'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);  #connection
         $di->params['Aura\Sql\ExtendedPdo']['dsn'] = $database_handle;
@@ -73,6 +45,10 @@ class Config extends ContainerConfig
         ///
         $di->set('user', $di->lazyNew('Domain\User\User'));
         $di->types['User'] = $di->lazyGet('user');
+
+        $di->params['Aura\Auth\AuthFactory']['cookie'] = $_COOKIE;
+        $di->params['Aura\Auth\Verifier\PasswordVerifier']['algo'] = PASSWORD_DEFAULT; // should be optional
+
     }
 }
 

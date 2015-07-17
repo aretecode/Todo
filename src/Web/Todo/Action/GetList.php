@@ -4,11 +4,9 @@ namespace Todo\Action;
 
 use Aura\Payload\Payload;
 
-use Domain\Todo\ApplicationService\GetList as GetListService;
-use Domain\User\ApplicationService\UserService;
-
+use Domain\Domain;
 use Todo\Input\UserItemInput;
-use Todo\Input\GetListInput;
+use Todo\Input\DeleteItemInput;
 use Radar\Adr\Input;
 
 use Todo\Responder\GetListResponder;
@@ -17,23 +15,14 @@ class GetList extends AbstractTodoAction
 {
     public function __construct(
         Input $input,
-        GetListService $todoDomain,
-        UserService $userDomain, 
+        Domain $domain, 
         GetListResponder $responder
     ) {
-        parent::__construct($input, $todoDomain, $userDomain, $responder);
+        parent::__construct($input, $domain, $responder);
     }
 
-    public function __invoke($userId) 
+    public function __invoke($userId)
     {
-        if ($payload = $this->userDomain->isUserNotAuthenticatedPayload()) {
-            return $payload;
-        }
-
-        // $user = $this->userDomain->currentUser();$userId = $user->userId()
-        $payload = $this->todoDomain->listForUserId($userId); 
-
-        // var_dump($payload);
-        return $payload;
+        return $this->domain->listForUserId($userId); 
     }
 }

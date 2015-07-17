@@ -5,6 +5,12 @@ namespace Domain\Todo\ApplicationService;
 use Aura\Payload\Payload;
 use Domain\Todo\TodoEntity;
 
+/**
+ * 
+ * If dealing with Views, `Add` makes more sense.
+ * If just doing the operations, the word `Creat` makes more sense
+ * 
+ */
 class AddItem {
     use UserAllowedDomain;
   

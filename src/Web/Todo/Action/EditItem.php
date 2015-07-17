@@ -4,11 +4,9 @@ namespace Todo\Action;
 
 use Aura\Payload\Payload;
 
-use Domain\Todo\ApplicationService\EditItem as EditItemService;
-use Domain\User\ApplicationService\UserService;
-
+use Domain\Domain;
 use Todo\Input\UserItemInput;
-use Todo\Input\EditItemInput;
+use Todo\Input\DeleteItemInput;
 use Radar\Adr\Input;
 
 use Todo\Responder\EditItemResponder;
@@ -17,21 +15,17 @@ class EditItem extends AbstractTodoAction
 {
     public function __construct(
         Input $input,
-        EditItemService $todoDomain,
-        UserService $userDomain, 
+        Domain $domain, 
         EditItemResponder $responder
     ) {
-        parent::__construct($input, $todoDomain, $userDomain, $responder);
+        parent::__construct($input, $domain, $responder);
     }
 
+    // can have parameters as array() or could change for single parameters
     public function __invoke($input) 
     {
-        if ($payload = $this->userDomain->isUserNotAuthenticatedPayload()) {
-            return $payload;
-        }
-
-        $user = $this->userDomain->currentUser();
-        $payload = $this->todoDomain->edit($input['todoId'], $user->userId(), $input['description']);
+        $user = $this->domain->currentUser();
+        $payload = $this->domain->edit($input['todoId'], $user->userId(), $input['description']);
         return $payload;
     }
 }

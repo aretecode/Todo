@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-  <meta charset="utf-8" /> 
+    <meta charset="utf-8" /> 
 
-  <script src="resources/scripts/ajax/aj/aj.js"></script> 
-  <script src="resources/scripts/ajax/parameter/easyParameterAdapter.js"></script> 
+    <script>
+        <?php 
+            include '../example/resources/scripts/ajax/aj/aj.js'; 
+            include '../example/resources/scripts/ajax/parameter/easyParameterAdapter.js'; 
+        ?>
+    </script>
 
-  <!--
+    <!--
+    The above script is used when running from the command line starting in web/, if on a dev server, use the following two script links 
+    
+    <script src="../example/resources/scripts/ajax/aj/aj.js"></script> 
+    <script src="../example/resources/scripts/ajax/parameter/easyParameterAdapter.js"></script> 
+    -->
+    <!--
     use these to make it faster when the time is right
     <script src="resources/scripts/ajax/aj/ajG.js"></script> 
     <script src="resources/scripts/ajax/aj/ajP.js"></script>
@@ -17,9 +27,10 @@
   
     // I moved it from /web/ to /example/ but the .htaccess when running from console has to be changed so I will do that later
     // var url = "http://localhost:8080/web/todo";
+    // var url = "http://localhost:8080/todo";
   -->
 
-  <script>
+    <script>
       var url = "http://localhost:8080/todo";
       function $(s) { return document.getElementById(s) }
 
@@ -30,8 +41,14 @@
             {
               url: url,
               data: p,
-              error: function(result){console.log(result); console.log("error"); },
-              success: function(result){console.log(result); console.log("success");},
+              listeners: {
+                500: function(result){console.log(result); console.log("500");},
+                404: function(result){console.log(result); console.log("404");},
+                201: function(result){console.log(result); console.log("201");},
+                200: function(result){console.log(result); console.log("200");},
+                303: function(result){console.log(result); console.log("303");},
+                other: function(result){console.log(result); console.log("other");}
+              },
               done: function(result){console.log(result); console.log("done");},
               requestType: "POST",
               route: true
@@ -42,14 +59,21 @@
       function addTodo() {
         // post
         var p = "add" + "/"  + $("ajax_input").value; 
+        console.log(p);
         aj(
             {
               url: url,
               data: p,
-              error: function(result){console.log(result); console.log("error"); },
-              success: function(result){console.log(result); console.log("success");},
               done: function(result){console.log(result); console.log("done");},
-              requestType: "GET",
+              requestType: "GET",              
+              listeners: {
+                500: function(result){console.log(result); console.log("500");},
+                404: function(result){console.log(result); console.log("404");},
+                404: function(result){console.log(result); console.log("404");},
+                200: function(result){console.log(result); console.log("201");},
+                303: function(result){console.log(result); console.log("303");},
+                other: function(result){console.log(result); console.log("303");},
+              },
               route: true
             } 
         );        
@@ -63,9 +87,14 @@
             {
               url: url,
               data: p,
-              error: function(result){console.log(result); console.log("error"); },
-              success: function(result){console.log(result); console.log("success");},
-              done: function(result){console.log(result); console.log("done");},
+              listeners: {
+                500: function(result){console.log(result); console.log("500");},
+                404: function(result){console.log(result); console.log("404");},
+                201: function(result){console.log(result); console.log("201");},
+                200: function(result){console.log(result); console.log("200");},
+                303: function(result){console.log(result); console.log("303");},
+                other: function(result){console.log(result); console.log("other");}
+              },
               requestType: "POST",
               route: true
             } 
@@ -80,9 +109,14 @@
             {
               url: url,
               data: p,
-              error: function(result){console.log(result); console.log("error"); },
-              success: function(result){console.log(result); console.log("success");},
-              done: function(result){console.log(result); console.log("done");},
+              listeners: {
+                500: function(result){console.log(result); console.log("500");},
+                404: function(result){console.log(result); console.log("404");},
+                201: function(result){console.log(result); console.log("201");},
+                200: function(result){console.log(result); console.log("200");},
+                303: function(result){console.log(result); console.log("303");},
+                other: function(result){console.log(result); console.log("other");}
+              },
               requestType: "GET"
             } 
         );        
@@ -97,9 +131,14 @@
             {
               url: url,
               data: p,
-              error: function(result){console.log(result); console.log("error"); },
-              success: function(result){console.log(result); console.log("success");},
-              done: function(result){console.log(result); console.log("done");},
+              listeners: {
+                500: function(result){console.log(result); console.log("500");},
+                404: function(result){console.log(result); console.log("404");},
+                201: function(result){console.log(result); console.log("201");},
+                200: function(result){console.log(result); console.log("200");},
+                303: function(result){console.log(result); console.log("303");},
+                other: function(result){console.log(result); console.log("other");}
+              },
               requestType: "GET",
               route: true
             } 
@@ -113,9 +152,14 @@
             {
               url: url,
               data: p,
-              error: function(result){console.log(result); console.log("error"); },
-              success: function(result){console.log(result); console.log("success");},
-              done: function(result){console.log(result); console.log("done");},
+              listeners: {
+                500: function(result){console.log(result); console.log("500");},
+                404: function(result){console.log(result); console.log("404");},
+                201: function(result){console.log(result); console.log("201");},
+                200: function(result){console.log(result); console.log("200");},
+                303: function(result){console.log(result); console.log("303");},
+                other: function(result){console.log(result); console.log("other");}
+              },
               requestType: "POST"
             } 
         ); 
@@ -129,6 +173,7 @@
     <input type="button" onclick="addTodo();" id="add_button" value="add"/>
     <input type="button" onclick="editTodo();" id="get_button" value="edit"/>
     <input type="button" onclick="getTodoList();" id="getlist_button" value="get list"/>
+    <input type="button" onclick="getTodo();" id="gettodo_button" value="get todo" disabled/>
   </form>
   <div id="ResponseDiv"></div>
   <div id="loading"></div>
