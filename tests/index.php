@@ -18,7 +18,8 @@ use Todo\DeleteItemTest;
 
 require_once 'bootstrap.php';
 
-loadDotEnv(__DIR__.'/../');
+$upone = str_replace('/tests', "", __DIR__);
+loadDotEnv($upone);
 createDefaultDatabase();
 
 startSession();
