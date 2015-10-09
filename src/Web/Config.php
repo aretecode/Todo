@@ -37,19 +37,8 @@ class Config extends ContainerConfig
 
         // could do Todo_database_handle & Account_database_handle
 
-        if (isset($_ENV['DB_DSN'])) {
-            $db = $_ENV['DB_DSN'];
-            $username = $_ENV['DB_USERNAME'];
-            $pass = $_ENV['DB_PASSWORD'];
-        }
-        else {
-            $db = getenv('DB_DSN');
-            $username = getenv('DB_USERNAME');
-            $pass = getenv('DB_PASSWORD');
-        }
-
-        $database_handle = new \PDO($db, $username, $pass);  #connection
-        $di->params['Aura\Sql\ExtendedPdo']['dsn'] = $database_handle;
+        $databaseHandle = \defaultTodoPdo();
+        $di->params['Aura\Sql\ExtendedPdo']['dsn'] = $databaseHandle;
 
         ///     
         $di->set('aura/payload', $di->lazyNew('Aura\Payload\Payload'));
@@ -60,7 +49,6 @@ class Config extends ContainerConfig
 
         $di->params['Aura\Auth\AuthFactory']['cookie'] = $_COOKIE;
         $di->params['Aura\Auth\Verifier\PasswordVerifier']['algo'] = PASSWORD_DEFAULT; // should be optional
-
     }
 }
 

@@ -13,7 +13,8 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
     protected $output;
 
     public function setup() {
-        ob_start();
+        ob_start();        
+        echo "\nsetUp\n";
         $this->setUpADR();
         $this->setUpRoute();
     }
@@ -76,18 +77,22 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
 
     public function mostRecentTodo() {
         $databaseHandle = \defaultTodoPdo();
-        $statementHandle = $databaseHandle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
         $statementHandle = $databaseHandle->query("SELECT * FROM `todo`");
-        dump($databaseHandle);
-        dump($statementHandle);
-        $todo = $statementHandle->fetch();
+        $todos = $statementHandle->fetchAll();
+        var_dump($todos);
 
+        $selectOne = $databaseHandle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
+        $todo = $selectOne->fetch();
         return $todo;
     }
 
-    protected function tearDown()
+    public function tearDown()
     {
+        echo "\ntoreDown\n";
         $this->output .= PHP_EOL . ob_get_clean();
-        fwrite(STDOUT, $this->output . "\n");
+        if (defined('STDOUT'))
+            fwrite(STDOUT, $this->output . "\n");
+        else 
+            echo $this->output ."\n";
     }
 }

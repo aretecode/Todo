@@ -18,32 +18,21 @@ class AddItemTest extends AbstractTest
     }
 
     public function testAddingSuccess() 
-    {        
+    {               
         $description = rand(0, 100000000) . ' :-)';
         $request = $this->newRequest('/todo/add/'.$description); // , 'GET'
         $response = $this->responseFromRun();
         $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}'); 
+        
+        $todo = $this->mostRecentTodo();         
     }      
-    public function testAddingSuccess2() 
-    {
+    public function testAddingSecond() 
+    {        
         $description = rand(0, 100000000) . ' :-)';
         $request = $this->newRequest('/todo/add/'.$description); 
         $response = $this->responseFromRun();
         $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}');
-    }
-    public function testAddingSuccess3() 
-    {
-        $description = rand(0, 100000000) . ' :-)';
-        $request = $this->newRequest('/todo/add/'.$description); 
-        $response = $this->responseFromRun();
-        $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}');
-    }
-    public function testAddingSuccess4() 
-    {
-        $description = rand(0, 100000000) . ' :-)';
-        $request = $this->newRequest('/todo/add/'.$description); 
-        $response = $this->responseFromRun();
-        $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}');
+        $todo = $this->mostRecentTodo(); 
     }
 
 
@@ -51,7 +40,8 @@ class AddItemTest extends AbstractTest
      * @TODO: BecauseItAlreadyExists && BecauseInvalid /// 500, 405
      */
     public function testAddingFailure() 
-    {              
+    {          
+        echo __METHOD__;    
         // getting most recent so we are trying to insert something that already exists
         $todo = $this->mostRecentTodo(); 
         $description = $todo['description'];

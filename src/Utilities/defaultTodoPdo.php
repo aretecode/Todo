@@ -12,6 +12,5 @@ function defaultTodoPdo() {
         $pass = getenv('DB_PASSWORD');
     }
 
-
     return new PDO($db, $username, $pass);
 }
