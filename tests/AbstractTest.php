@@ -2,7 +2,6 @@
 
 namespace Todo;
 
-use PDO;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 use Relay\Middleware\ExceptionHandler;
@@ -68,18 +67,18 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
 
     // 
     public function mostRecentEntryId() {
-        $database_handle = new PDO($_ENV['DB_DSN'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']); 
-        $statement_handle = $database_handle->query("SELECT `todoId` FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
-        $result = $statement_handle->fetch();
+        $databaseHandle = \defaultTodoPdo(); 
+        $databaseHandle = $database_handle->query("SELECT `todoId` FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
+        $result = $statementHandle->fetch();
 
         $todoId = $result[0];
         return $todoId;
     }
 
     public function mostRecentTodo() {
-        $database_handle = new PDO($_ENV['DB_DSN'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
-        $statement_handle = $database_handle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
-        $todo = $statement_handle->fetch();
+        $databaseHandle = \defaultTodoPdo();
+        $databaseHandle = $databaseHandle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
+        $todo = $statementHandle->fetch();
 
         return $todo;
     }

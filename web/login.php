@@ -8,12 +8,12 @@ require '../vendor/autoload.php';
 startSession();
 loadDotEnv(__DIR__);
 
-$auth_factory = new \Aura\Auth\AuthFactory($_COOKIE);
-$auth = $auth_factory->newInstance();
+$authFactory = new \Aura\Auth\AuthFactory($_COOKIE);
+$auth = $authFactory->newInstance();
 //
 
 //
-$pdo = new \PDO($_ENV['DB_DSN'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
+$pdo = \defaultTodoPdo();
 $cols = array(
     'username', // "AS username" is added by the adapter
     'password', // "AS password" is added by the adapter
@@ -26,14 +26,14 @@ $where = 'active = 1';
 
 $hash = new \Aura\Auth\Verifier\PasswordVerifier(PASSWORD_DEFAULT);
 
-$pdo_adapter = $auth_factory->newPdoAdapter($pdo, $hash, $cols, $from, $where);
+$pdoAdapter = $authFactory->newPdoAdapter($pdo, $hash, $cols, $from, $where);
 // 
 
-$login_service = $auth_factory->newLoginService($pdo_adapter);
+$loginService = $authFactory->newLoginService($pdoAdapter);
 
 try {
     if (isset($_POST['username']) && isset($_POST['password'])) {
-        $login_service->login($auth, array(
+        $loginService->login($auth, array(
             'username' => $_POST['username'],
             'password' => $_POST['password'],
             )

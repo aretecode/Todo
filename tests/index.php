@@ -27,22 +27,10 @@ $redirectPayload = redirectOnEmptyCookie();
 modifyServerSuperGlobalVariable(__DIR__);
 
 function login() {
-    $auth_factory = new \Aura\Auth\AuthFactory($_COOKIE);
-    $auth = $auth_factory->newInstance();
+    $authFactory = new \Aura\Auth\AuthFactory($_COOKIE);
+    $auth = $authFactory->newInstance();
     //
 
-    if (isset($_ENV['DB_DSN'])) {
-        $db = $_ENV['DB_DSN'];
-        $username = $_ENV['DB_USERNAME'];
-        $pass = $_ENV['DB_PASSWORD'];
-    }
-    else {
-        $db = getenv('DB_DSN');
-        $username = getenv('DB_USERNAME');
-        $pass = getenv('DB_PASSWORD');
-    }
-
-    $pdo = new \PDO();
     $cols = array(
         'username', // "AS username" is added by the adapter
         'password', // "AS password" is added by the adapter
@@ -55,16 +43,17 @@ function login() {
 
     $hash = new \Aura\Auth\Verifier\PasswordVerifier(PASSWORD_DEFAULT);
 
-    $pdo_adapter = $auth_factory->newPdoAdapter($pdo, $hash, $cols, $from, $where);
-    // 
+    $pdo = defaultTodoPdo();
+    $pdoAdapter = $authFactory->newPdoAdapter($pdo, $hash, $cols, $from, $where);
+    //
 
-    $login_service = $auth_factory->newLoginService($pdo_adapter);
+    $loginService = $authFactory->newLoginService($pdoAdapter);
 
-    $login_service->login($auth, array(
+    $loginService->login($auth, array(
         'username' => 'harikt',
         'password' => '123456',
         )
-    );    
+    );
     $auth->setUserName('harikt');
 }
 
@@ -90,8 +79,3 @@ $deleteTest = new DeleteItemTest();
 $deleteTest->setUp();
 $deleteTest->testDeleteSuccess();
 $deleteTest->testDeleteFailure();
-
-// echo $one . $two . $three . $four;
-// echo $one . $three . $four;
-
-// $getItemTest, $userTest

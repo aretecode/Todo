@@ -32,7 +32,8 @@
             "src/Utilities/startSession.php",
             "src/Utilities/redirectRelative.php",
             "src/Utilities/loadDotEnv.php",
-            "src/Utilities/createDefaultDatabase.php"
+            "src/Utilities/createDefaultDatabase.php",
+            "src/Utilities/defaultTodoPdo.php"
         ]   
     },
     "scripts": {

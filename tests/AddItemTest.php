@@ -30,7 +30,6 @@ class AddItemTest extends AbstractTest
      */
     public function testAddingFailure() 
     {              
-        
         // getting most recent so we are trying to insert something that already exists
         $todo = $this->mostRecentTodo(); 
         $description = $todo['description'];
@@ -39,7 +38,5 @@ class AddItemTest extends AbstractTest
         $response = $this->responseFromRun();
         
         $this->assertRelayResponse($response, 400, ['Content-Type' => ['application/json']], '["a Todo with the same Description was found",{"description":"'.$description.'"}]');
-        
-        // $this->output .= "\n" . ob_get_clean();
     }    
 }

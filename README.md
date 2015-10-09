@@ -68,6 +68,8 @@ Does it compare Input instead of Output if it is a 404?
 * [x] ~Make the aj(ax) example not just interpret other HTTP status codes as `error` but react respectively.
 * [ ] Add Views
 * [ ] Hotswap Responses
+* [ ] getItemTest
+* [ ] userTest
 
 ## Credits (uses)
 - [Radar](https://github.com/radarphp/Radar.Adr/)
