@@ -11,7 +11,7 @@ use Radar\Adr\Responder\Responder;
 class DeleteItemResponder extends Responder
 {           
     // from example-code
-    protected $payload_method = array(
+    protected $payloadMethod = array(
         'NOT_FOUND' => 'notFound',
         'NOT_DELETED' => 'deleted',
         'DELETED' => 'notDeleted',

@@ -1,60 +1,63 @@
 <?php
 
+use Radar\Adr\Boot as RadarBoot;
+use Radar\Adr\Route;
+use Radar\Adr\Responder\Responder;
 
-function includeIndex() {
-    include('../web/index.php');
+use Relay\Middleware\ExceptionHandler;
+use Relay\Middleware\ResponseSender;
+use Zend\Diactoros\Response as Response;
+use Zend\Diactoros\ServerRequestFactory;
+
+use Domain\Todo\ApplicationService\EditItem;
+
+use Todo\AddItemTest;
+use Todo\EditItemTest;
+use Todo\GetListTest;
+use Todo\DeleteItemTest;
+
+require_once 'bootstrap.php';
+
+loadDotEnv(__DIR__);
+createDefaultDatabase();
+
+startSession();
+$redirectPayload = redirectOnEmptyCookie();
+modifyServerSuperGlobalVariable(__DIR__);
+
+function login() {
+    $auth_factory = new \Aura\Auth\AuthFactory($_COOKIE);
+    $auth = $auth_factory->newInstance();
+    //
+
+    //
+    $pdo = new \PDO($_ENV['DB_DSN'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
+    $cols = array(
+        'username', // "AS username" is added by the adapter
+        'password', // "AS password" is added by the adapter
+        'email',
+        'fullname',
+        'website'
+    );
+    $from = 'users';
+    $where = 'active = 1';
+
+    $hash = new \Aura\Auth\Verifier\PasswordVerifier(PASSWORD_DEFAULT);
+
+    $pdo_adapter = $auth_factory->newPdoAdapter($pdo, $hash, $cols, $from, $where);
+    // 
+
+    $login_service = $auth_factory->newLoginService($pdo_adapter);
+
+    $login_service->login($auth, array(
+        'username' => 'harikt',
+        'password' => '123456',
+        )
+    );    
+    $auth->setUserName('harikt');
 }
 
-require '../vendor/autoload.php';
-
-use Aura\Di\ContainerBuilder;
-class Boot extends RadarBoot
-{
-    // only added this so that it would auto resolve
-    protected function newContainer(array $config)
-    {
-        $config = array_merge(['Radar\Adr\Config'], $config);
-        return (new ContainerBuilder())->newConfiguredInstance($config, true);
-    }
-}
-
-/**
- * only for the Auth
- */
-if (session_status() === PHP_SESSION_ACTIVE) 
-    session_start();
-
-/**
- * alternatively, Dotenv::load(dirname(__DIR__) . DIRECTORY_SEPARATOR . '.env');
- */
-Dotenv::load([
-    'filepath' => dirname(__DIR__) . DIRECTORY_SEPARATOR . '.env',
-    'toEnv' => true,
-]);
-
-function adr() {
-    $boot = new Boot();
-
-    /**
-     *  this parameter is [optional]
-     *  $boot->newContainer is private
-     *  remember, the class can be named anything that makes sense in your ubiquitous language
-     *  ['Radar\Adr\Config'] is auto merged
-     */
-    $adr = $boot->adr([
-        'Web\Config',
-    ]);
-
-    /**
-     * Middleware
-     */
-    $adr->middle(new ResponseSender());
-    $adr->middle(new ExceptionHandler(new Response()));
-    $adr->middle('Radar\Adr\Handler\RoutingHandler');
-    $adr->middle('Radar\Adr\Handler\ActionHandler');
-
-    return $adr;
-}
+login();
 
 
 $addTest = new AddItemTest();
@@ -76,5 +79,8 @@ $deleteTest = new DeleteItemTest();
 $deleteTest->setUp();
 $deleteTest->testDeleteSuccess();
 $deleteTest->testDeleteFailure();
+
+// echo $one . $two . $three . $four;
+// echo $one . $three . $four;
 
 // $getItemTest, $userTest

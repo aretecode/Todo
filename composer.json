@@ -1,7 +1,7 @@
 {
-    "name": "radar/project",
+    "name": "aretecode/todo",
     "type": "project",
-    "description": "An Action-Domain-Responder project skeleton.",
+    "description": "An ADR test example project.",
     "license": "MIT",
     "require": {
         "php": ">=5.5.0",
@@ -14,15 +14,26 @@
         "aura/accept": "*",
         "aura/web": "*",
         "aura/sql": "*",
-        "aura/view": "*",
-
-        "phpunit/phpunit": "dev-master"
+        "aura/view": "*"
+    },    
+    "require-dev": {        
+        "phpunit/phpunit": "5.1.*",
+        "symfony/var-dumper": "3.0.*"
     },
+
     "autoload": {
         "psr-4": {
-            "Todo\\": "src/Web/Todo/",
-            "": "src/"            
-        }
+            "Todo\\": ["src/Web/Todo/", "tests/"],
+            "": "src/"
+        },
+        "files": [
+            "src/Utilities/modifyServerSuperGlobal.php",
+            "src/Utilities/redirectOnEmptyCookie.php",
+            "src/Utilities/startSession.php",
+            "src/Utilities/redirectRelative.php",
+            "src/Utilities/loadDotEnv.php",
+            "src/Utilities/createDefaultDatabase.php"
+        ]   
     },
     "scripts": {
         "post-create-project-cmd" : [

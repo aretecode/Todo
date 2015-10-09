@@ -24,10 +24,10 @@ $logout_service = $auth_factory->newLogoutService(null);
 
 $logout_service->logout($auth);
 
-if ($auth->isAnon()) {
+if ($auth->isAnon()) 
     echo "You are now logged out.";
-} else {
+else 
     echo "Something went wrong; you are still logged in.";
-}
+
 
 echo $auth->getStatus();

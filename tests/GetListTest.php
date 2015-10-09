@@ -5,7 +5,7 @@ namespace Todo;
 class GetListTest extends AbstractTest 
 {
     protected function setUpRoute() 
-    {
+    {        
         $this->adr->get('Todo\GetList\Get', '/todo/getlist/{userId}', 'Todo\Action\GetList') 
             ->input('Todo\Input\GetListInput')
             ->responder('Todo\Responder\GetItemResponder')
@@ -16,7 +16,7 @@ class GetListTest extends AbstractTest
      * @TODO: need to assert response here, should it get from db?
      */
     public function testGetListSuccess() 
-    {              
+    {                  
         $userId = 1;
         $request = $this->newRequest('/todo/getlist/'.$userId);
         $response = $this->responseFromRun();

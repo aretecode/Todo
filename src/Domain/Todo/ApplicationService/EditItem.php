@@ -5,6 +5,12 @@ namespace Domain\Todo\ApplicationService;
 use Aura\Payload\Payload;
 use Exception;
 
+
+/**
+ *
+ * Could be titled `updated`, titled `edit` because it will make more sense when using Views & getting default values
+ * 
+ */
 class EditItem
 {
     use UserAllowedDomain;

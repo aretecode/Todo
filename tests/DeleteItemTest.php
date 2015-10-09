@@ -5,7 +5,7 @@ namespace Todo;
 class DeleteItemTest extends AbstractTest 
 {
     protected function setUpRoute() 
-    {
+    {        
         // ->input('Todo\Input\EditItemInput')
         $this->adr->get('Todo\DeleteItem\Get', '/todo/delete/{id}', 'Todo\Action\DeleteItem') 
             ->responder('Todo\Responder\DeleteItemResponder');
@@ -16,7 +16,7 @@ class DeleteItemTest extends AbstractTest
      *  303
      */
     public function testDeleteSuccess() 
-    {              
+    {            
         $todoId = $this->mostRecentEntryId();
         $request = $this->newRequest('/todo/delete/'.$todoId);
         $response = $this->responseFromRun();

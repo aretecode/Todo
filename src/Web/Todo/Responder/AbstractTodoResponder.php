@@ -44,5 +44,24 @@ abstract class AbstractTodoResponder extends Responder
         $this->view->setView($view);
         
         $this->response->withBody($this->view->__invoke());
+    }    
+
+    /**
+     * this did not exist in Radar\Adr\Responder\Responder
+     */
+    protected function notCreated()
+    {
+        $this->response = $this->response->withStatus(400);
+        $this->jsonBody($this->payload->getInput());
+    }
+    protected function notDeleted()
+    {
+        $this->response = $this->response->withStatus(304);
+        $this->jsonBody($this->payload->getInput());
+    }
+    protected function notUpdated()
+    {
+        $this->response = $this->response->withStatus(409);
+        $this->jsonBody($this->payload->getInput());
     }
 }

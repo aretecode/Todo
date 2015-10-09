@@ -1,7 +1,5 @@
 <?php
 
-// @26/06/15-14:03
-// @26/06/15-11:25
 namespace Domain\User\ApplicationService;
 
 use Aura\Payload\Payload;

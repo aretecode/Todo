@@ -10,7 +10,7 @@ use Radar\Adr\Responder\Responder;
 
 class AddItemResponder extends AbstractTodoResponder
 {
-    protected $payload_method = array(
+    protected $payloadMethod = array(
         'CREATED' => 'CREATED',
         'NOT_VALID' => 'NOT_VALID',
         'NOT_CREATED' => 'NOT_CREATED',

@@ -1,9 +1,11 @@
 
+An experiment with [ADR](https://github.com/pmjones/adr).
+
 ## Instructions 
 
-- Set DB in .env
+1. Set DB in .env
 
-- Create the tables (using the following SQL)
+2. Create the tables (using the following SQL)
 
   ```sql
   CREATE TABLE `users` (
@@ -29,15 +31,16 @@
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   ```
 
--  Change into the project directory (is `todo` here), then start the built-in PHP web server:
+3. Change into the project directory (is `todo` here), then start the built-in PHP web server:
 ```
     cd todo
     php -S localhost:8080 -t web/
 ```
 
-- Browse to <http://localhost:8080/todo/ajax.php> too do some stuff with a GUI
+4. Browse to <http://localhost:8080/todo/ajax.php> to do some stuff with a GUI
 
-- You can also browse to <http://localhost:8080/add/words-of-the-todo-you-want-to-add> or with other commands
+5. You can also browse to <http://localhost:8080/add/words-of-the-todo-you-want-to-add> or with other commands
+> if using ajax, change the `var url = ` in [linkhere]
 
 ## Questions: 
 Should UserId be in the HTTTP Request & then use AppService and return a payload only if NOT_AUTHORIZED?
@@ -53,15 +56,18 @@ Add vs Create?
 
 How to best test testGetListSuccess ? get results from db & compare? Regex compare just a bit of it?
 > Current comparison is fine, think it is something with Zend
+
 Does it compare Input instead of Output if it is a 404?
 > Yes, but in Zend 
 
 ## @TODO: 
-AuthorizationService implementation.
-~~Fix User~~
-~~Add Login form for the authentication.~~
-Put it on a demo site so it can be played around with.
-~Make the aj(ax) example not just interpret other HTTP status codes as `error` but react respectively.
+* [ ] AuthorizationService implementation.
+* [x] ~~Fix User~~
+* [x] ~~Add Login form for the authentication.~~
+* [ ] Put it on a demo site so it can be played around with.
+* [x] ~Make the aj(ax) example not just interpret other HTTP status codes as `error` but react respectively.
+* [ ] Add Views
+* [ ] Hotswap Responses
 
 ## Credits (uses)
 - [Radar](https://github.com/radarphp/Radar.Adr/)

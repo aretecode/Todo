@@ -27,8 +27,7 @@ class AddItem {
         if ($this->gateway->hasTodoWithDescription($description)) {
             return $this->payload
                 ->setStatus(Payload::NOT_CREATED)
-                ->setMessages(['a Todo with the same Description was found'])
-                ->setOutput(['description' => $description]);
+                ->setInput(['a Todo with the same Description was found', ['description' => $description]]);
         }
 
         return false;

@@ -7,28 +7,30 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 use Relay\Middleware\ExceptionHandler;
 use Relay\Middleware\ResponseSender;
+use Web\Boot;
 
-abstract class AbstractTest extends PHPUnit_Framework_TestCase {
-    protected $adr;
+abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
+    public $adr;
+    protected $output;
 
-    public function setUp()
-    {
+    public function setup() {
+        ob_start();
         $this->setUpADR();
         $this->setUpRoute();
     }
 
-    protected function setUpADR() {
+    public function setUpADR() {
         $boot = new Boot();
 
         $adr = $boot->adr([
             'Web\Config',
         ]);
-
+      
+      
         $adr->middle(new ResponseSender());
         $adr->middle(new ExceptionHandler(new Response()));
-        $adr->middle('Radar\Adr\Handler\RoutingHandler');
+        $adr->middle('Radar\Adr\Handler\RoutingHandler');  
         $adr->middle('Radar\Adr\Handler\ActionHandler');
-
         $this->adr = $adr;
     }
 
@@ -50,15 +52,15 @@ abstract class AbstractTest extends PHPUnit_Framework_TestCase {
             new Response(),
             function ($request, $response) { return $response; }
         );
-        $this->assertEquals($expectStatus, $response->getStatusCode());
-        $this->assertEquals($expectBody, $response->getBody()->__toString());
-        $this->assertEquals($expectHeaders, $response->getHeaders());
+        $this->assertEquals($expectStatus, $response->getStatusCode(), 'expected status did not match');
+        $this->assertEquals($expectBody, $response->getBody()->__toString(), 'expected body did not match');
+        $this->assertEquals($expectHeaders, $response->getHeaders(), 'expected headers did not match');
     }         
     protected function assertRelayResponse($response, $expectStatus, $expectHeaders, $expectBody)
     {
-        $this->assertEquals($expectBody, $response->getBody()->__toString());
-        $this->assertEquals($expectStatus, $response->getStatusCode());
-        $this->assertEquals($expectHeaders, $response->getHeaders());
+        $this->assertEquals($expectBody, $response->getBody()->__toString(), 'expected body did not match');
+        $this->assertEquals($expectStatus, $response->getStatusCode(), 'expected status did not match');
+        $this->assertEquals($expectHeaders, $response->getHeaders(), 'expected headers did not match');
     }       
     protected function responseFromRun() {
         return $response = $this->adr->run(ServerRequestFactory::fromGlobals(), new Response());
@@ -80,5 +82,12 @@ abstract class AbstractTest extends PHPUnit_Framework_TestCase {
         $todo = $statement_handle->fetch();
 
         return $todo;
+    }
+
+    protected function tearDown()
+    {
+        echo "eh?";        
+        $this->output .= PHP_EOL . ob_get_clean();
+        fwrite(STDOUT, $this->output . "\n");
     }
 }
