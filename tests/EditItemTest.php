@@ -24,9 +24,7 @@ class EditItemTest extends AbstractTest
      * @TODO: testUpdatingNotFound + one for Failure with 500
      */
     public function testUpdatingFailure() 
-    {             
-        ob_start();   
-        
+    {                     
         $failingTodoId = "-1";        
         $newDescription = 'Hullabaloo! Hephalumps & Woozles.';
         $request = $this->newRequest('/todo/edit/'.$failingTodoId.'/'.$newDescription);
@@ -37,8 +35,6 @@ class EditItemTest extends AbstractTest
         $responseString = addslashes($responseString);
         $responseString = '"'.$responseString.'"';
 
-        $this->assertRelayResponse($response, 404, ['Content-Type' => ['application/json']], $responseString);
-        
-        $this->output .= ob_get_clean();
+        $this->assertRelayResponse($response, 404, ['Content-Type' => ['application/json']], $responseString);        
     }    
 }

@@ -22,9 +22,17 @@ class AddItemTest extends AbstractTest
         $description = rand(0, 100000000) . ' :-)';
         $request = $this->newRequest('/todo/add/'.$description); // , 'GET'
         $response = $this->responseFromRun();
-        $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}');
+        $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}'); 
     }      
+    public function testAddingSuccess2() 
+    {
+        $description = rand(0, 100000000) . ' :-)';
+        $request = $this->newRequest('/todo/add/'.$description); 
+        $response = $this->responseFromRun();
+        $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}');
+    }
 
+    
     /**
      * @TODO: BecauseItAlreadyExists && BecauseInvalid /// 500, 405
      */

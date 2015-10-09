@@ -13,7 +13,5 @@ function defaultTodoPdo() {
     }
 
 
-    $db = new PDO($db, $username, $pass);
-    dump($db);
-    return $db;
+    return new PDO($db, $username, $pass);
 }
