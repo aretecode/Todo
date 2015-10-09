@@ -9,7 +9,6 @@ if (! file_exists($autoloader)) {
 }
 require $autoloader;
 
-
 createDefaultDatabase();
 startSession();
 

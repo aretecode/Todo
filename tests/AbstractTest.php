@@ -78,9 +78,9 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
         $databaseHandle = \defaultTodoPdo();
         $statementHandle = $databaseHandle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
         $statementHandle = $databaseHandle->query("SELECT * FROM `todo`");
-        $todo = $statementHandle->fetch();
+        dump($databaseHandle);
         dump($statementHandle);
-        dump($todo);
+        $todo = $statementHandle->fetch();
 
         return $todo;
     }
