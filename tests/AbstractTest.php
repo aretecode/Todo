@@ -68,7 +68,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
     // 
     public function mostRecentEntryId() {
         $databaseHandle = \defaultTodoPdo(); 
-        $databaseHandle = $database_handle->query("SELECT `todoId` FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
+        $statementHandle = $databaseHandle->query("SELECT `todoId` FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
         $result = $statementHandle->fetch();
 
         $todoId = $result[0];
@@ -77,7 +77,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
 
     public function mostRecentTodo() {
         $databaseHandle = \defaultTodoPdo();
-        $databaseHandle = $databaseHandle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
+        $statementHandle = $databaseHandle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
         $todo = $statementHandle->fetch();
 
         return $todo;
