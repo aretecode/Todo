@@ -85,7 +85,6 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
 
     protected function tearDown()
     {
-        echo "eh?";        
         $this->output .= PHP_EOL . ob_get_clean();
         fwrite(STDOUT, $this->output . "\n");
     }

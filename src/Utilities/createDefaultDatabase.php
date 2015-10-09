@@ -1,7 +1,7 @@
 <?php
 
 function createDefaultDatabase() {
-    $pdo = new \PDO($_ENV['DB_DSN'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
+    $pdo = \defaultTodoPdo();
     $createTable = $pdo->exec('
     CREATE TABLE IF NOT EXISTS `users` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
