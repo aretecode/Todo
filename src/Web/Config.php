@@ -36,7 +36,19 @@ class Config extends ContainerConfig
         */       
 
         // could do Todo_database_handle & Account_database_handle
-        $database_handle = new \PDO($_ENV['DB_DSN'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);  #connection
+
+        if (isset($_ENV['DB_DSN'])) {
+            $db = $_ENV['DB_DSN'];
+            $username = $_ENV['DB_USERNAME'];
+            $pass = $_ENV['DB_PASSWORD'];
+        }
+        else {
+            $db = getenv('DB_DSN');
+            $username = getenv('DB_USERNAME');
+            $pass = getenv('DB_PASSWORD');
+        }
+
+        $database_handle = new \PDO($db, $username, $pass);  #connection
         $di->params['Aura\Sql\ExtendedPdo']['dsn'] = $database_handle;
 
         ///     
