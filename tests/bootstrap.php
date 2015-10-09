@@ -10,7 +10,10 @@ if (! file_exists($autoloader)) {
 require $autoloader;
 
 
+$upone = str_replace('/tests', "", __DIR__);
+loadDotEnv($upone);
 createDefaultDatabase();
+
 startSession();
 $redirectPayload = redirectOnEmptyCookie();
 modifyServerSuperGlobalVariable(__DIR__);

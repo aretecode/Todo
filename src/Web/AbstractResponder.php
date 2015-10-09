@@ -23,7 +23,6 @@ abstract class AbstractResponder extends Responder
     // PayloadInterface
     public function setPayload($payload)
     {
-        echo "payload set";
         $this->payload = $payload;
     } 
 }
