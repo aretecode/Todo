@@ -5,28 +5,30 @@ php:
   - 7.0
   - hhvm
 
+# optionally specify a list of environments, for example to test different RDBMS
+env:
+  - DB=pgsql
+  - DB=mysql
+
 before_install:
   - pip install --user codecov
   - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS auraauthentication;" -U postgres; fi
   - if [[ "$DB" == "pgsql" ]]; then psql -c "create database auraauthentication;" -U postgres; fi
   - if [[ "$DB" == "mysql" ]]; then mysql -e "DROP DATABASE IF EXISTS auraauthentication;" -U uroot; fi
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS auraauthentication;" -uroot; fi
+  - mysql -c "DROP DATABASE IF EXISTS auraauthentication;" -U uroot;
+  - mysql -e "create database IF NOT EXISTS auraauthentication;" -uroot;
 
 before_script:
   - wget http://getcomposer.org/composer.phar 
   - php composer.phar self-update
   - php composer.phar install --dev
-  
+
 script: 
   - phpunit
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-
-# optionally specify a list of environments, for example to test different RDBMS
-env:
-  - DB=mysql
-  - DB=pgsql
 
 # optionally set up exclutions and allowed failures in the matrix
 matrix:
