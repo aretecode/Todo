@@ -10,12 +10,6 @@
         //include '../example/resources/scripts/ajax/parameter/easyParameterAdapter.js'; 
     ?>
 
-    <!--
-    // I moved it from /web/ to /example/ but the .htaccess when running from console has to be changed so I will do that later
-    // var url = "http://localhost:8080/web/todo";
-    // var url = "http://localhost:8080/todo";
-    -->
-
     <script>
       var 
         url = "http://localhost:8080/todo",
