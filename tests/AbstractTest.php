@@ -25,7 +25,6 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
             'Web\Config',
         ]);
       
-      
         $adr->middle(new ResponseSender());
         $adr->middle(new ExceptionHandler(new Response()));
         $adr->middle('Radar\Adr\Handler\RoutingHandler');  
@@ -78,7 +77,10 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
     public function mostRecentTodo() {
         $databaseHandle = \defaultTodoPdo();
         $statementHandle = $databaseHandle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
+        $statementHandle = $databaseHandle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC");
         $todo = $statementHandle->fetch();
+        dump($statementHandle);
+        dump($todo);
 
         return $todo;
     }
