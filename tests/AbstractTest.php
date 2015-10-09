@@ -12,12 +12,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
     public $adr;
     protected $output;
 
-    public function setup() {
-        ob_start();        
-        //echo "\nsetUp\n";
-        $this->setUpADR();
-        $this->setUpRoute();
-    }
+   
 
     public function setUpADR() {
         $boot = new Boot();

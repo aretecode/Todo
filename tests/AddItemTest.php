@@ -18,12 +18,21 @@ class AddItemTest extends AbstractTest
     }
 
     public function testAddingSuccess() 
-    {               
+    {                  
+        ob_start();        
+        //echo "\nsetUp\n";
+        $this->setUpADR();
+        $this->setUpRoute();
+     
         $description = rand(0, 100000000) . ' :-)';
         $request = $this->newRequest('/todo/add/'.$description); // , 'GET'
         $response = $this->responseFromRun();
         $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}'); 
-        $todo = $this->mostRecentTodo();         
+        $todo = $this->mostRecentTodo();                
+
+        echo "\ntoreDown\n";
+        $this->output .= PHP_EOL . ob_get_clean();
+        fwrite(STDOUT, $this->output . "\n");
     }      
 
     /*
