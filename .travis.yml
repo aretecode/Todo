@@ -1,9 +1,9 @@
 language: php
 
 php:
-  - 5.6
+#  - 5.6
   - 7.0
-  - hhvm
+#  - hhvm
 
 # optionally specify a list of environments, for example to test different RDBMS
 env:
@@ -31,11 +31,11 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 # optionally set up exclutions and allowed failures in the matrix
-matrix:
-  exclude:
-    - php: hhvm
-      env: DB=pgsql  # PDO driver for pgsql is unsupported by HHVM (3rd party install for support)
-  allow_failures:
-    - php: 7.0
-    - php: hhvm
+#matrix:
+#  exclude:
+#    - php: hhvm
+#      env: DB=pgsql  # PDO driver for pgsql is unsupported by HHVM (3rd party install for support)
+#  allow_failures:
+#    - php: 7.0
+#    - php: hhvm
 

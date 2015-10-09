@@ -14,7 +14,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
 
     public function setup() {
         ob_start();        
-        echo "\nsetUp\n";
+        //echo "\nsetUp\n";
         $this->setUpADR();
         $this->setUpRoute();
     }
@@ -80,10 +80,10 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
         $statementHandle = $databaseHandle->query("SELECT * FROM `todo`");
         $todos = $statementHandle->fetchAll();
         var_dump($todos);
-        dump($todos);
 
         $selectOne = $databaseHandle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
         $todo = $selectOne->fetch();
+        var_dump($todo);
         return $todo;
     }
 
