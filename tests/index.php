@@ -18,6 +18,11 @@ use Todo\DeleteItemTest;
 
 require_once 'bootstrap.php';
 
+$upone = str_replace('/tests', "", __DIR__);
+loadDotEnv($upone);
+$redirectPayload = redirectOnEmptyCookie();
+modifyServerSuperGlobalVariable(__DIR__);
+
 $addTest = new AddItemTest();
 $addTest->setUp();
 $addTest->testAddingSuccess();
