@@ -7,15 +7,16 @@ php:
 
 before_install:
   - pip install --user codecov
+  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS auraauthentication;" -U postgres; fi
+  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database auraauthentication;" -U postgres; fi
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "DROP DATABASE IF EXISTS auraauthentication;" -U uroot; fi
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS auraauthentication;" -uroot; fi
 
 before_script:
   - wget http://getcomposer.org/composer.phar 
   - php composer.phar self-update
   - php composer.phar install --dev
-  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS auraauthentication;" -U postgres; fi
-  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database auraauthentication;" -U postgres; fi
-  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS auraauthentication;" -uroot; fi
-
+  
 script: 
   - phpunit
 
