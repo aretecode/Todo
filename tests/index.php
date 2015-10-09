@@ -31,8 +31,18 @@ function login() {
     $auth = $auth_factory->newInstance();
     //
 
-    //
-    $pdo = new \PDO($_ENV['DB_DSN'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
+    if (isset($_ENV['DB_DSN'])) {
+        $db = $_ENV['DB_DSN'];
+        $username = $_ENV['DB_USERNAME'];
+        $pass = $_ENV['DB_PASSWORD'];
+    }
+    else {
+        $db = getenv('DB_DSN');
+        $username = getenv('DB_USERNAME');
+        $pass = getenv('DB_PASSWORD');
+    }
+
+    $pdo = new \PDO();
     $cols = array(
         'username', // "AS username" is added by the adapter
         'password', // "AS password" is added by the adapter
