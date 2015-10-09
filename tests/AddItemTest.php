@@ -32,6 +32,7 @@ class AddItemTest extends AbstractTest
         $request = $this->newRequest('/todo/add/'.$description); 
         $response = $this->responseFromRun();
         $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}');
+        
         $todo = $this->mostRecentTodo(); 
     }
 
@@ -41,7 +42,6 @@ class AddItemTest extends AbstractTest
      */
     public function testAddingFailure() 
     {          
-        echo __METHOD__;    
         // getting most recent so we are trying to insert something that already exists
         $todo = $this->mostRecentTodo(); 
         $description = $todo['description'];
