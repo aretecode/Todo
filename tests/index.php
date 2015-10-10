@@ -21,11 +21,13 @@ require_once __DIR__.'/../vendor/autoload.php';
 $upone = str_replace('/tests', "", __DIR__);
 loadDotEnv($upone);
 $redirectPayload = redirectOnEmptyCookie();
-// modifyServerSuperGlobalVariable(__DIR__);
+modifyServerSuperGlobalVariable(__DIR__);
 
 require_once 'bootstrap.php';
 $addTest = new AddItemTest();
+$addTest->setUp();
 $addTest->testAddingSuccess();
+$addTest->tearDown();
 
 
 /*
