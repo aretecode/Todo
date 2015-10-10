@@ -22,10 +22,30 @@ class AddItemTest extends AbstractTest
     public function testAddingSuccess() 
     {           
         $todo = $this->mostRecentTodo();                
+         $databaseHandle = \defaultTodoPdo();
+        $apdo = new ExtendedPdo($databaseHandle);
+        $affected = $apdo->perform(
+            'INSERT INTO todo (
+                userId,
+                description
+            ) VALUES (
+                :userId,
+                :description
+            )',
+            ['userId' => 523100, 'description' => 'zzzzzzzz'] 
+        );
+        if ($affected) 
+            $id = $apdo->lastInsertId();
+        var_dump($id);
+
+
+        $todo = $this->mostRecentTodo();                
+       
+        /*
         $description = rand(0, 100000000) . ' :-)';
         $request = $this->newRequest('/todo/add/'.$description); // , 'GET'
         $response = $this->responseFromRun();
-        $todo = $this->mostRecentTodo();                
+        */
         // $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}'); 
     }      
 
