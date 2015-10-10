@@ -9,6 +9,7 @@
          stopOnFailure="false"      
          syntaxCheck="true"
          verbose="true"
+         stderr="true"
          bootstrap="tests/bootstrap.php">
          
     <testsuites>

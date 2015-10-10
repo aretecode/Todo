@@ -30,7 +30,6 @@ $addTest->testAddingSuccess();
 $addTest->tearDown();
 
 
-/*
 $addTest = new AddItemTest();
 $addTest->setUp();
 $addTest->testAddingSuccess();
@@ -74,4 +73,3 @@ $deleteTest->setUp();
 $deleteTest->testDeleteFailure();
 $deleteTest->tearDown();
 
-*/

@@ -21,7 +21,6 @@ class AddItemTest extends AbstractTest
 
     public function testAddingSuccess() 
     {           
-        $todo = $this->mostRecentTodo();                
         $databaseHandle = \defaultTodoPdo();
         $description = rand(0, 100000000) . ' :-)';
         $request = $this->newRequest('/todo/add/'.$description); // , 'GET'
@@ -29,7 +28,6 @@ class AddItemTest extends AbstractTest
         $this->assertRelayResponse($response, 201, ['Content-Type' => ['application/json']], '{"description":"'.$description.'"}'); 
     }      
 
-    /*
     public function testAddingSecond() 
     {        
         $description = rand(0, 100000000) . ' :-)';
@@ -42,7 +40,7 @@ class AddItemTest extends AbstractTest
 
     /**
      * @TODO: BecauseItAlreadyExists && BecauseInvalid /// 500, 405
-     * /
+     */
     public function testAddingFailure() 
     {          
         // getting most recent so we are trying to insert something that already exists
@@ -54,5 +52,4 @@ class AddItemTest extends AbstractTest
         
         $this->assertRelayResponse($response, 400, ['Content-Type' => ['application/json']], '["a Todo with the same Description was found",{"description":"'.$description.'"}]');
     }  
-    */  
 }
