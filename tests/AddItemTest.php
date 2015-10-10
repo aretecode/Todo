@@ -37,7 +37,9 @@ class AddItemTest extends AbstractTest
         if ($affected) 
             $id = $apdo->lastInsertId();
         var_dump($id);
-
+        
+        $statementHandle = $databaseHandle->prepare("INSERT INTO todo (userId, description ) VALUES (144, 'eh')");
+        $statementHandle->execute();
 
         $todo = $this->mostRecentTodo();                
        
