@@ -2,6 +2,7 @@
 An experiment with [ADR](https://github.com/pmjones/adr)
 
 [![Build Status](https://secure.travis-ci.org/aretecode/todo.svg)](https://travis-ci.org/aretecode/todo)
+[![Codacy Badge](https://api.codacy.com/project/badge/f3a1ef3f3fc1426e939778136f387b52)](https://www.codacy.com/app/aretecode/Todo)
 
 ## Instructions 
 
