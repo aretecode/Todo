@@ -76,11 +76,13 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
 
     public function mostRecentTodo() {
         $databaseHandle = \defaultTodoPdo();
-        $statementHandle = $databaseHandle->query("SELECT * FROM `todo`");
+        $statementHandle = $databaseHandle->prepare("SELECT * FROM `todo`");
+        $statementHandle->execute();
         $todos = $statementHandle->fetchAll();
         var_dump($todos);
-
-        $selectOne = $databaseHandle->query("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
+       
+        $selectOne = $databaseHandle->prepare("SELECT * FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
+        $selectOne->execute();
         $todo = $selectOne->fetch();
         var_dump($todo);
         return $todo;
