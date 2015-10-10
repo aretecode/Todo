@@ -10,7 +10,7 @@ if (! file_exists($autoloader)) {
 require $autoloader;
 
 
-// createDefaultDatabase();
+createDefaultDatabase();
 
 startSession();
 $redirectPayload = redirectOnEmptyCookie();
