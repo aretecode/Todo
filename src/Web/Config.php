@@ -10,7 +10,6 @@ class Config extends ContainerConfig
     public function define(Container $di)
     {
         /*
-            should it be done defining them manually, or auto?
             why can't a trait be set?
 
             $u = User();
@@ -35,15 +34,9 @@ class Config extends ContainerConfig
             $di->params['Domain\Todo\ApplicationService\DeleteItem']['payload'] = $p;
         */       
 
-        // could do Todo_database_handle & Account_database_handle
-
         $databaseHandle = \defaultTodoPdo();
         $di->params['Aura\Sql\ExtendedPdo']['dsn'] = $databaseHandle;
-
-        ///     
         $di->set('aura/payload', $di->lazyNew('Aura\Payload\Payload'));
-
-        ///
         $di->set('user', $di->lazyNew('Domain\User\User'));
         $di->types['User'] = $di->lazyGet('user');
 

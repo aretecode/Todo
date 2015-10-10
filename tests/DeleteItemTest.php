@@ -11,10 +11,6 @@ class DeleteItemTest extends AbstractTest
             ->responder('Todo\Responder\DeleteItemResponder');
     }
 
-    /**
-     *  HOW TO MERGE $REQUEST AND THE $_GET? 
-     *  303
-     */
     public function testDeleteSuccess() 
     {            
         $todoId = $this->mostRecentEntryId();

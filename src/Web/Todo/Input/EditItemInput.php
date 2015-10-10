@@ -10,7 +10,6 @@ class EditItemInput
     {    	
     	// return ['todoId' => $request->getQueryParams()['todoId'], 'description' => $request->getQueryParams()['description']];
     	// return [$request->getQueryParams()['todoId'], $request->getQueryParams()['description']];
-
         $todoId = $request->getAttribute('todoId');
         $description = $request->getAttribute('description');
         return array('todoId' => $todoId, 'description' => $description);

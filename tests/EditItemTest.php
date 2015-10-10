@@ -8,7 +8,7 @@ class EditItemTest extends AbstractTest
     {
         $this->adr->get('Todo\EditItem\Get', '/todo/edit/{todoId}/{description}', 'Todo\Action\EditItem') 
             // ->input('Todo\Input\EditItemInput')
-            ->responder('Todo\Responder\EditItemResponder');
+             ->responder('Todo\Responder\EditItemResponder');
     }
 
     public function testUpdatingSuccess() 

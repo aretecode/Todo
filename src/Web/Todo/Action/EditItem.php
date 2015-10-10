@@ -24,6 +24,7 @@ class EditItem extends AbstractTodoAction
     // can have parameters as array() or could change for single parameters
     public function __invoke($input) 
     {
+        var_dump($input);
         $user = $this->domain->currentUser();
         $payload = $this->domain->edit($input['todoId'], $user->userId(), $input['description']);
         return $payload;

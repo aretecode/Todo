@@ -1,5 +1,6 @@
-
-An experiment with [ADR](https://github.com/pmjones/adr).
+# Todo
+An experiment with [ADR](https://github.com/pmjones/adr)
+[![Build Status](https://secure.travis-ci.org/aretecode/todo.svg)](https://travis-ci.org/aretecode/todo)
 
 ## Instructions 
 
@@ -37,19 +38,22 @@ An experiment with [ADR](https://github.com/pmjones/adr).
     php -S localhost:8080 -t web/
 ```
 
-4. Browse to <http://localhost:8080/todo/ajax.php> to do some stuff with a GUI
-
-5. You can also browse to <http://localhost:8080/add/words-of-the-todo-you-want-to-add> or with other commands
+4. Browse to `<http://localhost:8080/todo/ajax.php>` to do some stuff with a GUI
+ 
+5. You can browse to `<http://localhost:8080/add/words-of-the-todo-you-want-to-add>` or with other commands
 > if using ajax, change the `var url = ` in [linkhere]
 
-## Questions: 
-Should UserId be in the HTTTP Request & then use AppService and return a payload only if NOT_AUTHORIZED?
+OR 
 
+- Change into the project directory (is `todo` here) and go to `<http:\\your-todo-project/web/todo/add/words-of-the-todo-you-want-to-add>` 
+
+
+## Questions: 
 Should Parameters in Domain be (array), or individual?
-> Whichever makes more ssense for your domain
+> Whichever makes more sense for your domain
 
 Why does EditItemInput not work?
-> Unknown, debug with playing around with the $_SERVER, 
+> Unknown, debug with playing around with the $_SERVER
 
 Add vs Create?
 > Add makes more sense when using Views and with that View, reaching into the domain only for defaults
@@ -59,6 +63,8 @@ How to best test testGetListSuccess ? get results from db & compare? Regex compa
 
 Does it compare Input instead of Output if it is a 404?
 > Yes, but in Zend 
+
+Why can't traits be set in Aura.Di config?
 
 ## @TODO: 
 * [ ] AuthorizationService implementation.
@@ -70,6 +76,7 @@ Does it compare Input instead of Output if it is a 404?
 * [ ] Hotswap Responses
 * [ ] getItemTest
 * [ ] userTest
+* [ ] Add proper uses of HTTP Methods (especially Put)
 
 ## Credits (uses)
 - [Radar](https://github.com/radarphp/Radar.Adr/)

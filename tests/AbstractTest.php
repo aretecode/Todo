@@ -12,13 +12,15 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
     public $adr;
     protected $output;
 
-    public function setup() {
+    public function setup() 
+    {
         ob_start();        
         $this->setUpADR();
         $this->setUpRoute();
     }
 
-    public function setUpADR() {
+    public function setUpADR() 
+    {
         $boot = new Boot();
 
         $adr = $boot->adr([
@@ -60,12 +62,14 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expectStatus, $response->getStatusCode(), 'expected status did not match');
         $this->assertEquals($expectHeaders, $response->getHeaders(), 'expected headers did not match');
     }       
-    protected function responseFromRun() {
+    protected function responseFromRun() 
+    {
         return $response = $this->adr->run(ServerRequestFactory::fromGlobals(), new Response());
     }
 
     // 
-    public function mostRecentEntryId() {
+    public function mostRecentEntryId() 
+    {
         $databaseHandle = \defaultTodoPdo(); 
         $statementHandle = $databaseHandle->query("SELECT `todoId` FROM `todo` ORDER BY `todoId` DESC LIMIT 1");
         $result = $statementHandle->fetch();
@@ -74,17 +78,16 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase {
         return $todoId;
     }
 
-    public function mostRecentTodo() {
+    public function mostRecentTodo() 
+    {
         $databaseHandle = \defaultTodoPdo();
         $statementHandle = $databaseHandle->prepare("SELECT * FROM todo");
         $statementHandle->execute();
         $todos = $statementHandle->fetchAll();
-        var_dump($todos);
        
         $selectOne = $databaseHandle->prepare("SELECT * FROM todo ORDER BY todoId DESC LIMIT 1");
         $selectOne->execute();
         $todo = $selectOne->fetch();
-        var_dump($todo);
         return $todo;
     }
 

@@ -9,16 +9,10 @@ if (! file_exists($autoloader)) {
 }
 require $autoloader;
 
-
 createDefaultDatabase();
-
 startSession();
 $redirectPayload = redirectOnEmptyCookie();
 modifyServerSuperGlobalVariable(__DIR__);
-
-// $pdo = \defaultTodoPdo();
-// $pdo->exec('TRUNCATE TABLE auraauthentication');
-// $pdo->exec('TRUNCATE TABLE todo');
 
 function login() {
     $authFactory = new \Aura\Auth\AuthFactory($_COOKIE);
