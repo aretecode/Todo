@@ -1,5 +1,6 @@
 # Todo
 An experiment with [ADR](https://github.com/pmjones/adr)
+
 [![Build Status](https://secure.travis-ci.org/aretecode/todo.svg)](https://travis-ci.org/aretecode/todo)
 
 ## Instructions 
