@@ -1,7 +1,7 @@
 # Todo
 An experiment with [ADR](https://github.com/pmjones/adr)
 
-[![Build Status](https://secure.travis-ci.org/aretecode/todo.svg)](https://travis-ci.org/aretecode/todo)
+[![Build Status](https://secure.travis-ci.org/aretecode/Todo.svg)](https://travis-ci.org/aretecode/Todo)
 [![Codacy Badge](https://api.codacy.com/project/badge/f3a1ef3f3fc1426e939778136f387b52)](https://www.codacy.com/app/aretecode/Todo)
 
 ## Instructions 
@@ -25,6 +25,7 @@ An experiment with [ADR](https://github.com/pmjones/adr)
   (1, 'harikt', 'hello@example.com',  '$2y$10$PAzgJnHd/gTQzNznVg7un.HGEuGHYtYACCFknGuf.4diSunu3MA7C', 'Hari KT',  'http://harikt.com', 1),
   (2, 'pmjones',  'hello@example.com',  '$2y$10$vtW.Fu8fhWuuCZz6s/jus.ilkzOMjMGwbzdkZNUzIVZLc.PV/6dVG', 'Paul M Jones', 'http://paul-m-jones.com',  1);
   ```
+
   ```sql
   CREATE TABLE `todo` (
     `todoId` int(11) NOT NULL AUTO_INCREMENT,
@@ -43,7 +44,7 @@ An experiment with [ADR](https://github.com/pmjones/adr)
 4. Browse to `<http://localhost:8080/todo/ajax.php>` to do some stuff with a GUI
  
 5. You can browse to `<http://localhost:8080/add/words-of-the-todo-you-want-to-add>` or with other commands
-> if using ajax, change the `var url = ` in [linkhere]
+> if using ajax, change the `var url = ` in [ajax.php](https://github.com/aretecode/Todo/blob/master/web/ajax.php)
 
 OR 
 
